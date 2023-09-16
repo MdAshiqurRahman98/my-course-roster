@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import Cart from "../Cart/Cart";
 import { useState } from "react";
+import Swal from "sweetalert2/src/sweetalert2.js";
 
 const Courses = () => {
     const [allCourses, setAllCourses] = useState([]);
@@ -10,11 +11,42 @@ const Courses = () => {
     const [remaining, setRemaining] = useState(0);
     const [totalCost, setTotalCost] = useState(0);
 
+    const credit = 20;
+
     useEffect(() => {
         fetch("./data.json")
             .then((res) => res.json())
             .then((data) => setAllCourses(data));
     }, []);
+
+    const handleSelectCourse = (course) => {
+        const isExist = selectedCourse.find((item) => item.id == course.id);
+
+        let cost = course.salary;
+
+        if (isExist) {
+            return alert("Already Taken");
+        } else {
+            selectedCourse.forEach((item) => {
+                cost = cost + item.salary;
+            });
+            const remaining = 20 - cost;
+            if (cost > 20) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Something went wrong!",
+                    footer: '<a href="">Why do I have this issue?</a>',
+                });
+            } else {
+                setRemaining(remaining);
+
+                setTotalCost(cost);
+
+                setSelectedCourse([...selectedCourse, course]);
+            }
+        }
+    };
 
     return (
         <div className="max-w-screen-xl mx-auto px-8 md:px-16 lg:px-12 py-5 mb-5 mt-5">
