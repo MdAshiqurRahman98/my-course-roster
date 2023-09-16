@@ -1,6 +1,4 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-import React from "react";
+import PropTypes from 'prop-types';
 
 const Cart = ({ selectedCourse, remaining, totalCredit, totalPrice }) => {
     // console.log(selectedCourse);
@@ -13,7 +11,7 @@ const Cart = ({ selectedCourse, remaining, totalCredit, totalPrice }) => {
             <div className="text-[#1C1B1B99] text-sm border-b-2 border-[#1C1B1B33] pb-4">
                 {selectedCourse.map((course) => (
                     <ol key={course.id}>
-                        <li>{count = count + 1} {course.course_name}</li>
+                        <li className='pb-1'>{count = count + 1} {course.course_name}</li>
                     </ol>
                 ))}
             </div>
@@ -22,5 +20,12 @@ const Cart = ({ selectedCourse, remaining, totalCredit, totalPrice }) => {
         </div>
     );
 };
+
+Cart.propTypes = {
+    selectedCourse: PropTypes.array,
+    remaining: PropTypes.number,
+    totalCredit: PropTypes.number,
+    totalPrice: PropTypes.number
+}
 
 export default Cart;

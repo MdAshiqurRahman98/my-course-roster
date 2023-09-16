@@ -1,8 +1,6 @@
-/* eslint-disable react/jsx-key */
-/* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
-import Cart from "../Cart/Cart";
+import { useEffect } from "react";
 import { useState } from "react";
+import Cart from "../Cart/Cart";
 import Swal from "sweetalert2/src/sweetalert2.js";
 
 const Courses = () => {
