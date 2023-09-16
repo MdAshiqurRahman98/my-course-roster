@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 
-const Cart = ({ selectedCourse, remaining, totalCost }) => {
+const Cart = ({ selectedCourse, remaining, totalCredit }) => {
     // console.log(selectedCourse);
     let count = 0;
 
@@ -17,8 +17,8 @@ const Cart = ({ selectedCourse, remaining, totalCost }) => {
                     </ol>
                 ))}
             </div>
-            <h5 className="pt-2 border-b-2 border-[#1C1B1B33] pb-2 text-sm font-medium text-[#1C1B1BCC]">Total Credit Hour: {selectedCourse.length}</h5>
-            <h5 className="pt-2 text-sm font-semibold text-[#1C1B1BCC]">Total Price: {totalCost} USD</h5>
+            <h5 className="pt-2 border-b-2 border-[#1C1B1B33] pb-2 text-sm font-medium text-[#1C1B1BCC]">Total Credit Hour: {totalCredit}</h5>
+            <h5 className="pt-2 text-sm font-semibold text-[#1C1B1BCC]">Total Price: {totalCredit} USD</h5>
         </div>
     );
 };
