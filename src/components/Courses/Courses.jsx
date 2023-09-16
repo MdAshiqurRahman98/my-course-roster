@@ -10,8 +10,9 @@ const Courses = () => {
     const [selectedCourse, setSelectedCourse] = useState([]);
     const [remaining, setRemaining] = useState(0);
     const [totalCredit, setTotalCredit] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
 
-    const totalCreditHour = 20;
+    // const totalCreditHour = 20;
 
     useEffect(() => {
         fetch("./data.json")
@@ -23,26 +24,34 @@ const Courses = () => {
         const isExist = selectedCourse.find((item) => item.id == course.id);
 
         let creditHour = course.credit;
+        let price = course.price;
 
         if (isExist) {
-            return alert("Already Taken");
-        } else {
+            return Swal.fire({
+                icon: "warning",
+                title: "Sorry!",
+                text: "This course already taken",
+            });
+        }
+        else {
             selectedCourse.forEach((item) => {
                 creditHour = creditHour + item.credit;
+                price = price + item.price;
             });
+
             const remaining = 20 - creditHour;
+
             if (creditHour > 20) {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
-                    text: "Something went wrong!",
-                    footer: '<a href="">Why do I have this issue?</a>',
+                    text: "Credit limit exceeded!",
                 });
-            } else {
+            }
+            else {
                 setRemaining(remaining);
-
                 setTotalCredit(creditHour);
-
+                setTotalPrice(price);
                 setSelectedCourse([...selectedCourse, course]);
             }
         }
@@ -85,6 +94,7 @@ const Courses = () => {
                         selectedCourse={selectedCourse}
                         remaining={remaining}
                         totalCredit={totalCredit}
+                        totalPrice={totalPrice}
                     ></Cart>
                 </div>
             </div>
